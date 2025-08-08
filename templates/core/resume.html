@@ -1,0 +1,136 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Resume - Portfolio{% endblock %}
+
+{% block content %}
+<section class="resume-section py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Left Column -->
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100 contact-card">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4">Contact Info</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-3">
+                                <i class="fas fa-envelope me-2"></i>
+                                <a href="mailto:saadabid21g@gmail.com" class="text-decoration-none">saadabid21g@gmail.com</a>
+                            </li>
+                            <li class="mb-3">
+                                <i class="fas fa-phone me-2"></i>
+                                <a href="tel:+923088480610" class="text-decoration-none">+923088480610</a>
+                            </li>
+                            <li class="mb-3">
+                                <i class="fab fa-linkedin me-2"></i>
+                                <a href="https://www.linkedin.com/in/saad-abid-753aa9216/" target="_blank" class="text-decoration-none">LinkedIn Profile</a>
+                            </li>
+                            <li class="mb-3">
+                                <i class="fab fa-github me-2"></i>
+                                <a href="https://github.com/Saadpracha" target="_blank" class="text-decoration-none">GitHub Profile</a>
+                            </li>
+                            <li class="mb-3">
+                                <i class="fab fa-facebook me-2"></i>
+                                <a href="https://www.facebook.com/profile.php?id=100013419376366" target="_blank" class="text-decoration-none">Facebook Profile</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="col-lg-8">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4">Resume Preview</h5>
+                        <div class="resume-preview">
+                            <iframe src="{% static 'resume.pdf' %}" width="100%" height="600px" style="border: none;"></iframe>
+                        </div>
+                        <div class="text-center mt-4">
+                            <a href="{% static 'resume.pdf' %}" class="btn btn-primary" download>
+                                <i class="fas fa-download me-2"></i>Download Resume
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.resume-section {
+    background-color: #f8f9fa;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.contact-card {
+    width: 300px;
+    margin: 0 auto;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-title {
+    color: #2c3e50;
+    font-weight: 600;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+}
+
+.list-unstyled li {
+    margin-bottom: 15px;
+}
+
+.list-unstyled li i {
+    color: #3498db;
+    width: 20px;
+}
+
+.list-unstyled li a {
+    color: #2c3e50;
+    transition: color 0.3s ease;
+}
+
+.list-unstyled li a:hover {
+    color: #3498db;
+}
+
+.resume-preview {
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.btn-primary {
+    background-color: #3498db;
+    border-color: #3498db;
+    padding: 10px 25px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+    border-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 991.98px) {
+    .contact-card {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+</style>
+{% endblock %} 

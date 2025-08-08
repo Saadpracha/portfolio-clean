@@ -1,0 +1,327 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Blog - Portfolio{% endblock %}
+
+{% block content %}
+<section class="blog-section py-5">
+    <div class="container">
+        <div class="section-title-wrapper mb-5">
+            <h2 class="section-title text-center">
+                <span class="title-icon"><i class="fas fa-blog"></i></span>
+                Latest Blog Posts
+                <span class="title-sub">Insights and Tutorials</span>
+            </h2>
+        </div>
+        
+        <!-- Blog Posts -->
+        <div class="row" id="blogPosts">
+            <!-- Blog posts will be dynamically loaded here -->
+            <div class="col-12 text-center">
+                <div class="blog-loading">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2">Loading blog posts...</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Load More Button -->
+        <div class="text-center mt-5">
+            <button class="btn btn-primary btn-lg" id="loadMoreBtn" style="display: none;">
+                <i class="fas fa-sync-alt"></i> Load More Posts
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Blog Post Modal -->
+<div class="modal fade" id="blogPostModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="blogPostTitle"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="blog-post-content">
+                    <img id="blogPostImage" class="img-fluid mb-4" alt="Blog Post Image">
+                    <div id="blogPostContent"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a href="${post.url}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-external-link-alt"></i> Read Full Post
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Blog Card Styling */
+.blog-card {
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.blog-card .card-img-top {
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.blog-card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+.blog-card .card-body {
+    padding: 1.5rem;
+    background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+}
+
+.blog-card .card-title {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    transition: color 0.3s ease;
+}
+
+.blog-card:hover .card-title {
+    color: #0d6efd;
+}
+
+.blog-card .card-text {
+    color: #6c757d;
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.blog-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.blog-date {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.blog-category {
+    background: linear-gradient(45deg, #0d6efd, #0a58ca);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.blog-category:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Loading State */
+.blog-loading {
+    padding: 2rem;
+    text-align: center;
+}
+
+.blog-loading p {
+    color: #6c757d;
+    margin-top: 1rem;
+}
+
+/* Modal Styling */
+.modal-content {
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    background: linear-gradient(45deg, #0d6efd, #0a58ca);
+    color: white;
+    border-radius: 15px 15px 0 0;
+}
+
+.modal-footer {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Load More Button */
+#loadMoreBtn {
+    padding: 0.8rem 2rem;
+    border-radius: 30px;
+    background: linear-gradient(45deg, #0d6efd, #0a58ca);
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+#loadMoreBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(45deg, #0a58ca, #084298);
+}
+
+#loadMoreBtn i {
+    margin-right: 8px;
+    transition: transform 0.3s ease;
+}
+
+#loadMoreBtn:hover i {
+    transform: rotate(180deg);
+}
+
+/* Blog Post Content */
+.blog-post-content {
+    padding: 1rem;
+}
+
+.blog-post-content img {
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .blog-card .card-img-top {
+        height: 200px;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    let currentPage = 1;
+    const postsPerPage = 6;
+    let isLoading = false;
+    let hasMorePosts = true;
+
+    // Function to create blog card
+    function createBlogCard(post) {
+        return `
+            <div class="col-md-6 col-lg-4">
+                <div class="card blog-card">
+                    <img src="${post.image}" class="card-img-top" alt="${post.title}" onerror="this.src='/static/images/default-blog.jpg'">
+                    <div class="card-body">
+                        <div class="blog-meta">
+                            <span class="blog-date">${post.date}</span>
+                            <span class="blog-category">${post.category}</span>
+                        </div>
+                        <h3 class="card-title">${post.title}</h3>
+                        <p class="card-text">${post.excerpt}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button class="btn btn-outline-primary read-more" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#blogPostModal"
+                                    data-post='${JSON.stringify(post)}'>
+                                <i class="fas fa-book-reader"></i> Read More
+                            </button>
+                            <a href="${post.url}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                                <i class="fas fa-external-link-alt"></i> Visit Post
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    // Function to load blog posts
+    async function loadBlogPosts() {
+        if (isLoading || !hasMorePosts) return;
+        
+        isLoading = true;
+        const blogPosts = document.getElementById('blogPosts');
+        const loadingDiv = blogPosts.querySelector('.blog-loading');
+        
+        try {
+            const response = await fetch(`/api/blog-posts/?page=${currentPage}&per_page=${postsPerPage}`);
+            const data = await response.json();
+            
+            if (loadingDiv) {
+                loadingDiv.remove();
+            }
+            
+            if (data.posts.length > 0) {
+                data.posts.forEach(post => {
+                    blogPosts.insertAdjacentHTML('beforeend', createBlogCard(post));
+                });
+                
+                currentPage++;
+                document.getElementById('loadMoreBtn').style.display = 'inline-block';
+            } else {
+                hasMorePosts = false;
+                document.getElementById('loadMoreBtn').style.display = 'none';
+            }
+        } catch (error) {
+            console.error('Error loading blog posts:', error);
+            if (loadingDiv) {
+                loadingDiv.innerHTML = `
+                    <div class="alert alert-danger">
+                        Error loading blog posts. Please try again later.
+                    </div>
+                `;
+            }
+        } finally {
+            isLoading = false;
+        }
+    }
+
+    // Load initial posts
+    loadBlogPosts();
+
+    // Load more button click handler
+    document.getElementById('loadMoreBtn').addEventListener('click', loadBlogPosts);
+
+    // Blog post modal handler
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('read-more') || e.target.closest('.read-more')) {
+            const button = e.target.classList.contains('read-more') ? e.target : e.target.closest('.read-more');
+            const post = JSON.parse(button.dataset.post);
+            const modal = document.getElementById('blogPostModal');
+            
+            modal.querySelector('#blogPostTitle').textContent = post.title;
+            modal.querySelector('#blogPostImage').src = post.image;
+            modal.querySelector('#blogPostContent').innerHTML = post.content;
+            modal.querySelector('#readFullPost').href = post.url;
+        }
+    });
+
+    // Add target="_blank" to all external links
+    document.addEventListener('click', function(e) {
+        if (e.target.tagName === 'A' && e.target.hostname !== window.location.hostname) {
+            e.target.setAttribute('target', '_blank');
+            e.target.setAttribute('rel', 'noopener noreferrer');
+        }
+    });
+});
+</script>
+{% endblock %} 

@@ -1,0 +1,282 @@
+{% extends 'core/base.html' %}
+
+{% block title %}About Me - Portfolio{% endblock %}
+
+{% block content %}
+<section class="about-section py-5">
+    <div class="container">
+        <h1 class="section-header text-center mb-5">About Me</h1>
+        
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="card-title">Professional Journey</h2>
+                        <p class="card-text">
+                            With a Bachelor of Science in Computer Science from Pak-Austria Fachhochschule (2020–2024) and a Dean's List distinction in Summer 2023, I laid a strong foundation in web technologies and user-centered design during internships at Robotic World (HTML/CSS/Bootstrap) and Matrix Tech (WordPress, Figma) in 2021–2022.
+                        </p>
+                        <p class="card-text">
+                            In Summer 2023 I advanced into full-stack development at Giga Developers—designing database schemas with Django ORM, building RESTful APIs, and collaborating in agile teams—then tackled Python-driven machine-learning pipelines at Deventia Tech in Summer 2024, where I cleaned large datasets, trained models with scikit-learn, and visualized insights.
+                        </p>
+                        <p class="card-text">
+                            Since September 2024 at Developers 360, I've architected scalable Scrapy and Playwright scraping solutions, automated social-media workflows, and integrated AI models into production. Complemented by side projects—from IoT-enabled smart irrigation to a Django price-comparison platform—and early leadership as Team Manager at Arem Foundation, my versatile toolkit (Python, C++, Django, RPA, Jira/Slack) positions me to deliver high-impact software and data solutions.
+                        </p>
+                        <p class="card-text">
+                            Looking ahead, I'm committed to deepening my expertise in data science and artificial intelligence by mastering advanced techniques in machine learning and deep learning, and by contributing to open-source AI frameworks. My plan to architect robust backend systems using Django, emphasizing scalable API design, secure authentication, and seamless integration with data-driven services. By pursuing specialized certifications and collaborating on cross-functional projects, my aim to harness AI-powered analytics to drive smarter decision-making and build next-generation web applications that deliver both performance and meaningful user experiences.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="card-title">Technical Expertise</h2>
+                        
+                        <!-- Programming Languages -->
+                        <div class="skill-category mb-4">
+                            <h3><i class="fas fa-code me-2"></i>Programming Languages</h3>
+                            <div class="skills-grid">
+                                <div class="skill-item">
+                                    <img src="/static/skills/python.png" alt="Python" class="skill-logo">
+                                    <span>Python</span>
+                                </div>
+                                <div class="skill-item">
+                                    <img src="/static/skills/cpp.png" alt="C++" class="skill-logo">
+                                    <span>C++</span>
+                                </div>
+                                <div class="skill-item">
+                                    <img src="/static/skills/html5.png" alt="HTML" class="skill-logo">
+                                    <span>HTML</span>
+                                </div>
+                                <div class="skill-item">
+                                    <img src="/static/skills/css3.png" alt="CSS" class="skill-logo">
+                                    <span>CSS</span>
+                                </div>
+                                <div class="skill-item">
+                                    <img src="/static/skills/bootstrap.png" alt="Bootstrap" class="skill-logo">
+                                    <span>Bootstrap</span>
+                                </div>
+                                <div class="skill-item">
+                                    <img src="/static/skills/mysql.png" alt="MySQL" class="skill-logo">
+                                    <span>MySQL</span>
+                                </div>
+                                <div class="skill-item">
+                                    <img src="/static/skills/shell.png" alt="Shell Scripting" class="skill-logo">
+                                    <span>Shell Scripting</span>
+                                </div>
+                                <div class="skill-item">
+                                    <img src="/static/skills/uml.jpg" alt="UML" class="skill-logo">
+                                    <span>UML</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tools & Environments -->
+                        <div class="skill-category mb-4">
+                            <h3><i class="fas fa-tools me-2"></i>Tools & Environments</h3>
+                            <div class="skills-grid">
+                                <div class="skill-item">
+                                    <img src="/static/skills/wordpress.png" alt="Wordpress" class="skill-logo">
+                                    <span>Wordpress</span>
+                                </div>
+                                <div class="skill-item">
+                                    <img src="/static/skills/cisco.png" alt="Cisco Packet Tracer" class="skill-logo">
+                                    <span>Cisco Packet Tracer</span>
+                                </div>
+                                <div class="skill-item">
+                                    <img src="/static/skills/canva.png" alt="Canva Studio" class="skill-logo">
+                                    <span>Canva Studio</span>
+                                </div>
+                                <div class="skill-item">
+                                    <img src="/static/skills/docker.png" alt="Docker" class="skill-logo">
+                                    <span>Docker</span>
+                                </div>
+                                <div class="skill-item">
+                                    <img src="/static/skills/python.png" alt="Pip" class="skill-logo">
+                                    <span>Pip</span>
+                                </div>
+                                <div class="skill-item">
+                                    <img src="/static/skills/venv.png" alt="venv" class="skill-logo">
+                                    <span>venv</span>
+                                </div>
+                                <div class="skill-item">
+                                    <img src="/static/skills/notebook.png" alt="Notebook" class="skill-logo">
+                                    <span>Notebook</span>
+                                </div>
+                                <div class="skill-item">
+                                    <img src="/static/skills/pyscripts.png" alt="pyscripts" class="skill-logo">
+                                    <span>pyscripts</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Python Packages -->
+                        <div class="skill-category mb-4">
+                            <h3><i class="fab fa-python me-2"></i>Python Packages</h3>
+                            <div class="skills-grid">
+                                <div class="skill-item">
+                                    <img src="/static/skills/playwright.png" alt="Playwright" class="skill-logo">
+                                    <span>Playwright</span>
+                                </div>
+                                <div class="skill-item">
+                                    <img src="/static/skills/scrapy.png" alt="Scrapy" class="skill-logo">
+                                    <span>Scrapy</span>
+                                </div>
+                                <div class="skill-item">
+                                    <img src="/static/skills/tensorflow.png" alt="Tensorflow" class="skill-logo">
+                                    <span>Tensorflow</span>
+                                </div>
+                                <div class="skill-item">
+                                    <img src="/static/skills/selenium.png" alt="Selenium" class="skill-logo">
+                                    <span>Selenium</span>
+                                </div>
+                                <div class="skill-item">
+                                    <img src="/static/skills/requests.png" alt="Requests" class="skill-logo">
+                                    <span>Requests</span>
+                                </div>
+                                <div class="skill-item">
+                                    <img src="/static/skills/scikit.png" alt="Scikit-learn" class="skill-logo">
+                                    <span>Scikit-learn</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project Management -->
+                        <div class="skill-category">
+                            <h3><i class="fas fa-project-diagram me-2"></i>Project Management</h3>
+                            <div class="skills-grid">
+                                <div class="skill-item">
+                                    <img src="/static/skills/jira.png" alt="Jira" class="skill-logo">
+                                    <span>Jira</span>
+                                </div>
+                                <div class="skill-item">
+                                    <img src="/static/skills/slack.png" alt="Slack" class="skill-logo">
+                                    <span>Slack</span>
+                                </div>
+                                <div class="skill-item">
+                                    <img src="/static/skills/google.png" alt="Google Sheets" class="skill-logo">
+                                    <span>Google Sheets</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">Work Philosophy</h2>
+                        <p class="card-text">
+                            My approach combines technical expertise with a strong focus on user experience and business objectives. I believe in writing clean, maintainable code and following best practices in software development.
+                        </p>
+                        <div class="row mt-4">
+                            <div class="col-md-4">
+                                <div class="text-center">
+                                    <i class="fas fa-code fa-2x mb-3 text-primary"></i>
+                                    <h4>Clean Code</h4>
+                                    <p>Writing maintainable and efficient code</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="text-center">
+                                    <i class="fas fa-users fa-2x mb-3 text-primary"></i>
+                                    <h4>User-Focused</h4>
+                                    <p>Creating intuitive user experiences</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="text-center">
+                                    <i class="fas fa-rocket fa-2x mb-3 text-primary"></i>
+                                    <h4>Performance</h4>
+                                    <p>Optimizing for speed and efficiency</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.progress {
+    height: 25px;
+    margin-bottom: 10px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+}
+
+.progress-bar {
+    background-color: var(--secondary-color);
+    color: white;
+    text-align: left;
+    padding-left: 10px;
+    line-height: 25px;
+}
+
+.skill-category h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.card-text {
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.skill-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0.5rem;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    transition: transform 0.2s;
+}
+
+.skill-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.skill-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    margin-bottom: 0.5rem;
+}
+
+.skill-item span {
+    font-size: 0.8rem;
+    color: var(--primary-color);
+}
+
+.skill-category h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+}
+
+.skill-category h3 i {
+    color: var(--secondary-color);
+}
+</style>
+{% endblock %} 

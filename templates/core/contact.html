@@ -1,0 +1,192 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0 rounded-lg" style="background-color: #f8f9fa;">
+                <div class="card-header text-white text-center py-4 gradient-header">
+                    <h3 class="mb-0">Get in Touch</h3>
+                </div>
+                <div class="card-body p-4">
+                    <form id="contactForm" method="POST" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
+                                    <label for="name">Your Name</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
+                                    <label for="email">Your Email</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required>
+                                <label for="subject">Subject</label>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="form-floating">
+                                <textarea class="form-control" id="message" name="message" placeholder="Your Message" style="height: 150px" required></textarea>
+                                <label for="message">Your Message</label>
+                            </div>
+                        </div>
+                        <div class="d-grid">
+                            <button class="btn btn-lg gradient-btn" type="submit">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Info Section -->
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm gradient-card">
+                    <div class="card-body text-center">
+                        <i class="fas fa-map-marker-alt fa-3x mb-3 text-white"></i>
+                        <h5 class="card-title text-white">Location</h5>
+                        <p class="card-text text-white">Islamabad, Pakistan</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm gradient-card">
+                    <div class="card-body text-center">
+                        <i class="fas fa-envelope fa-2x mb-3 text-white"></i>
+                        <h5 class="card-title text-white">Email</h5>
+                        <p class="card-text text-white">saadabid21g@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm gradient-card">
+                    <div class="card-body text-center">
+                        <i class="fas fa-phone fa-2x mb-3 text-white"></i>
+                        <h5 class="card-title text-white">Phone</h5>
+                        <p class="card-text text-white">+92 308 8480610</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Success/Error Messages -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="successToast" class="toast align-items-center text-white border-0 gradient-toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                Message sent successfully!
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+    <div id="errorToast" class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                Error sending message. Please try again.
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    
+    fetch('{% url "core:contact" %}', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const successToast = new bootstrap.Toast(document.getElementById('successToast'));
+            successToast.show();
+            this.reset();
+        } else {
+            const errorToast = new bootstrap.Toast(document.getElementById('errorToast'));
+            errorToast.show();
+        }
+    })
+    .catch(error => {
+        const errorToast = new bootstrap.Toast(document.getElementById('errorToast'));
+        errorToast.show();
+    });
+});
+</script>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+:root {
+    --gradient-start: #2d1e1e;
+    --gradient-end: #d62828;
+}
+
+.gradient-header {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+}
+
+.gradient-card {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    transition: transform 0.3s ease;
+}
+
+.gradient-btn {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    border: none;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.gradient-toast {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+}
+
+.card {
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.form-control:focus {
+    border-color: var(--gradient-end);
+    box-shadow: 0 0 0 0.2rem rgba(214, 40, 40, 0.25);
+}
+
+.btn:hover {
+    background: linear-gradient(135deg, var(--gradient-end), var(--gradient-start));
+    transform: translateY(-2px);
+}
+
+.toast {
+    opacity: 1 !important;
+}
+</style>
+{% endblock %} 
